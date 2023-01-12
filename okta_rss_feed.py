@@ -76,6 +76,14 @@ class OktaTrustEvent:
     def test_self(me):
         print(me.format_message())
 
+
+    
+def test_send_email_success():
+    assert True
+
+def test_send_email_fail():
+    assert False
+
 if __name__ == "__main__":
 
     # date_time_str = '2023-01-06T16:03:34.693Z'
