@@ -11,16 +11,18 @@ on:
 
 permissions:
   contents: read
+env:
+  MY_WF_ENV: 'Test Workflow Env'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      SENDER: {{ $secrets.EMAIL_SENDER_NAME }}
-      SENDER_PWD: {{ $secrets.EMAIL_SENDER_PASSWORD }}
-      
+      MY_JOB_ENV: 'Job Env'
     steps:
     - uses: actions/checkout@v3
+      env:
+        MY_STEPS_ENV: 'Step ENV'
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
       with:
@@ -40,5 +42,8 @@ jobs:
       run: |
         pytest
         ls -l
-        python okta_rss_feed.py "$SENDER" "$SENDER_PWD"
+        echo $MY_WF_ENV
+        echo $MY_JOB_ENV
+        echo $MY_STEPS_ENV
+        #python okta_rss_feed.py "$SENDER" "$SENDER_PWD"
     
