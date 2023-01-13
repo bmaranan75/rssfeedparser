@@ -41,11 +41,14 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
+        env:
+          EMAIL_SENDER_NAME: ${{ secrets.EMAIL_SENDER_NAME }}
+          EMAIL_SENDER_PASSWORD: ${{secrets.EMAIL_SENDER_PASSWORD }}
         pytest
         ls -l
         echo $MY_WF_ENV
         echo $MY_JOB_ENV
         echo ${{ secrets.EMAIL_SENDER_NAME }}
         pwd
-        python okta_rss_feed.py ${{ secrets.EMAIL_SENDER_NAME }} ${{ secrets.EMAIL_SENDER_PASSWORD }}
+        python okta_rss_feed.py
     
