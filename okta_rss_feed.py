@@ -137,6 +137,8 @@ if __name__ == "__main__":
 
     # password = input("Enter Email Sender password : ")
 
+    print(email_sender)
+    print(sender_password)
     if email_sender != ""  and sender_password != "":
         trust_event = OktaTrustEvent(email_sender, sender_password)
         trust_event.send_email("text")
