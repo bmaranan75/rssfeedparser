@@ -6,6 +6,7 @@ from smtplib import SMTP
 from email.message import EmailMessage
 from okta_trust_client import OktaTrustClient
 import sys
+import os
 
 class OktaTrustEvent:
 
@@ -130,8 +131,9 @@ if __name__ == "__main__":
         email_sender = sys.argv[1]
         sender_password = sys.argv[2]
     else:
-        print("Missing argument - Sender email and password is required ")
-        exit()
+        # CHECK ENVIRONMENT VARIABLE
+        email_sender = os.environ.get("EMAIL_SENDER_NAME")
+        sender_password = os.environ.get("EMAIL_SENDER_PASSWORD")
 
     # password = input("Enter Email Sender password : ")
 
