@@ -45,5 +45,6 @@ jobs:
         echo $MY_WF_ENV
         echo $MY_JOB_ENV
         echo ${{ secrets.EMAIL_SENDER_NAME }}
+        pwd
         python okta_rss_feed.py ${{ secrets.EMAIL_SENDER_NAME }} ${{ secrets.EMAIL_SENDER_PASSWORD }}
     
