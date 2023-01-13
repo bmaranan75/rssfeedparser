@@ -12,7 +12,7 @@ on:
 permissions:
   contents: read
 env:
-  MY_WF_ENV: 'Test Workflow Env'
+  MY_WF_ENV: '{{ $secrets.EMAIL_SENDER_NAME }}'
 
 jobs:
   build:
