@@ -14,9 +14,11 @@ permissions:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
+    env:
+      SENDER: {{ $secrets.EMAIL_SENDER_NAME }}
+      SENDER_PWD: {{ $secrets.EMAIL_SENDER_PASSWORD }}
+      
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.10
@@ -38,4 +40,5 @@ jobs:
       run: |
         pytest
         ls -l
+        python okta_rss_feed.py "$SENDER" "$SENDER_PWD"
     
