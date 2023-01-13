@@ -11,8 +11,6 @@ on:
 
 permissions:
   contents: read
-env:
-  MY_WF_ENV: '{{ $secrets.EMAIL_SENDER_NAME }}'
 
 jobs:
   build:
@@ -39,11 +37,11 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test with pytest
+    - name: Test with pytest              
+      env:
+        EMAIL_SENDER_NAME: ${{ secrets.EMAIL_SENDER_NAME }}
+        EMAIL_SENDER_PASSWORD: ${{secrets.EMAIL_SENDER_PASSWORD }}
       run: |
-        env:
-          EMAIL_SENDER_NAME: ${{ secrets.EMAIL_SENDER_NAME }}
-          EMAIL_SENDER_PASSWORD: ${{secrets.EMAIL_SENDER_PASSWORD }}
         pytest
         ls -l
         echo $MY_WF_ENV
